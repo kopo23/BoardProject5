@@ -2,6 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@ page import="kr.ac.kopo.kopo23.domain.*" %>
 <%@ page import="kr.ac.kopo.kopo23.service.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +12,14 @@
 <body>
 <%
 	BoardService boardService = new BoardServiceImpl();
-	Board board1 = boardService.selectOne(1);
-	
+	Board board1 = boardService.selectOne(3);
 	
 %>
 hello world
-board title: <%= board1.getTitle() %>
-abcdfjkdsl
+<%= board1.getId() %>
+<%= board1.getTitle() %>
+<%= board1.getContent() %>
+
 </body>
 </html>
 

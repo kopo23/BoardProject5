@@ -18,13 +18,15 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board selectOne(int id) {
+		
 		return boardDao.selectOne(id);
 	}
 
 	@Override
 	public List<Board> selectAll() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return boardDao.selectAll();
 	}
 
 	@Override

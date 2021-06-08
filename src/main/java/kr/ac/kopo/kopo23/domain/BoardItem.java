@@ -3,7 +3,8 @@ package kr.ac.kopo.kopo23.domain;
 public class BoardItem {
 	private int id;
 	private String title;
-	private String content;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -15,12 +16,6 @@ public class BoardItem {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
 	}
 
 }
