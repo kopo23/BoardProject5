@@ -1,38 +1,77 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%request.setCharacterEncoding("UTF-8");%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="kr.ac.kopo.kopo23.domain.*" %>
 <%@ page import="kr.ac.kopo.kopo23.service.*" %>
-
+<%request.setCharacterEncoding("UTF-8");%>
+<%@ page session = "true" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href = "http://localhost:8086/BoardProject5/Board.css" />
+<link rel="stylesheet" type="text/css" href = "Board.css"/>
 <script>
 	function WriteBoard() {
-				
+		
+		if ($("#title").val().trim().length == 0 || $("#title").val() == null ){
+			
+			alert("ì œëª©ì€ ê³µë°±ì´ ë  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+			$("#title").focus;
+			return false;
+		}
+		
+		writeform.action = "Board_Write.jsp";
+		writeform.submit();
 	}
 </script>
 </head>
 <body>
-	  		<table cellspacing =1 width=800 border ="1" align="center">
+	<% 
+	
+	if (request.getParameter("content") == (null) && request.getParameter("title") == null) {
+		
+		%>
+		<form method = "post" id = "writeform" name = "writeform">
+	  		<table border ="1" align="center">
 				<tr>
-					<td align="center" style= "width: 70px;"><font size="1">Á¦¸ñ</font></td>
-					<td align="left" style = "width: 700px;"><input type="text" id = "title" id ="title" style = "width: 730px;"  placeholder ="Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä."></td>
+					<td align="center" style= "width: 200px;"><font size="1">ì œëª©</font></td>
+					<td align="left"><input type="text" name = "title" id = "title" style = "width: 500px;"  placeholder ="ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”."></td>
 				</tr>
 				<tr>
-					<td align="center" style= "width: 70px; height: 500px;">³»¿ë</td>
-					<td align="left" style = "width: 700px; height: 500px;"><textarea id = "content" style = "width: 730px;  height: 500px;"placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä."></textarea></td>
+					<td align="center"><font size="1">ì‘ì„±ì</font></td>
+					<td align="left" ><%=session.getAttribute("userid")%></td>
+				</tr>
+				<tr>
+					<td align="center" style= "height: 500px;">ë‚´ìš©</td>
+					<td align="left" style = "height: 500px;"><textarea name = "content" id = "content" style = "width: 500px;  height: 700px;"placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”."></textarea></td>
 				</tr>
 			</table>
 			
-	<button class = "btn" onclick =''>ÀÛ¼ºÇÏ±â</button> 
+			<button type = "button" class = "btn" onclick ='WriteBoard()'>ì‘ì„±í•˜ê¸°</button> 
+			<button type = "button" class = "btn" onclick="location.href='Board_List.jsp'">ëŒì•„ê°€ê¸°</button>
+		</form>
+		 <%
 	
-	<!-- ÀÌ ¹öÆ°À» ¿©±â¼­ °ªÀ»¹Ş¾Æ¼­ ¹Ù·Î Ã³¸®ÇÏ´Â¹æ¹ıÀº¾ø´Â°¡.. -->
-	
-	<button class = "btn" onclick="location.href='Board_List.jsp'">µ¹¾Æ°¡±â</button>
+	} else {
+		
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String userid = (String) session.getAttribute("userid");
+		
+		BoardService boardService = new BoardServiceImpl();
+		Board board = new Board();
+		
+		board.setTitle(title);
+		board.setContent(content);
+		board.setUserid(userid);
+		
+		boardService.create(board);
+		
+		%> <script>alert("ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤.")
+				window.location ='Board_List.jsp'
+		   </script> <%
+	}
+	%>
 </body>
 </html>

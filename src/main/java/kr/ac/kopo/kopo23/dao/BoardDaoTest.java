@@ -13,8 +13,25 @@ public class BoardDaoTest {
 //		BoardDao boardDao = new BoardDaoImpl();
 //		boardDao.create(board);
 		
+//		BoardDao boardDao = new BoardDaoImpl();
+//		System.out.println(boardDao.selectAll().size());
+//		for (int i = 0; i < boardDao.selectAll().size(); i++) {
+//			System.out.println(boardDao.selectAll().get(i).getTitle());
+//		}
+		
+		
 		BoardDao boardDao = new BoardDaoImpl();
+		//Board board = new Board();
+//		
+//		board.setContent("hi hi whats up man");
+//		board.setTitle("test1"); 
+//		board.setUserid("chan1");
+//		
+//		boardDao.create(board);  //Ãß°¡
+		
+		
 		System.out.println(boardDao.selectAll().size());
+		
 		for (int i = 0; i < boardDao.selectAll().size(); i++) {
 			System.out.println(boardDao.selectAll().get(i).getTitle());
 		}

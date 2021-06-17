@@ -12,8 +12,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void create(Board board) {
-		boardDao.create(board);
 		
+		boardDao.create(board);
 	}
 
 	@Override
@@ -24,21 +24,60 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<Board> selectAll() {
-		// TODO Auto-generated method stub
 		
 		return boardDao.selectAll();
+	}
+	
+	@Override
+	public List<Board> searchAll(String type, String keywords, boolean search_true) {
+		// TODO Auto-generated method stub
+		return boardDao.searchAll(type, keywords, search_true);
 	}
 
 	@Override
 	public void update(Board board) {
-		// TODO Auto-generated method stub
 		
+		boardDao.update(board);
 	}
 
 	@Override
 	public void delete(Board board) {
-		// TODO Auto-generated method stub
+		
+		boardDao.delete(board);
+	}
+
+	@Override
+	public void create_reply(Board board) {
+		
+		boardDao.create_reply(board);
+	}
+
+	@Override
+	public void delete_reply(Board board) {
+		
+		boardDao.delete_reply(board);
+	}
+	
+	@Override
+	public void update_reply(Board board) {
+
+		boardDao.update_reply(board);
+	}
+
+	@Override
+	public List<Board> selectReply(int id) {
+		
+		return boardDao.selectReply(id);
+	}
+
+	@Override
+	public void writeList() {
+		
 		
 	}
+
+
+	
+	
 
 }
